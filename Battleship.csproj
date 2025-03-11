@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Battleship">
+      <HintPath>obj\Debug\net8.0\ref\Battleship.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

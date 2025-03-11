@@ -2,9 +2,11 @@
 {
     internal class Program
     {
+        public bool isPlaying;
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Title.TitleScreen();
         }
     }
 }
+
