@@ -2,6 +2,9 @@
 {
     class BasePlayer
     {
+        public static string[] shipNames = { "Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer" };
+        public static int[] shipLength = { 5, 4, 2, 3, 4};
+
         private Grid grid;
         private Random rand;
 
@@ -15,16 +18,18 @@
         public void PlaceShips()
         {
             Random rand = new Random();
-            int x = 5;
-            int y = 5;
-
-            string direction = "H";
-            if (rand.Next(0, 2) == 0)
+            for (int i = 0; i < shipNames.Length; i++)
             {
-                direction = "V";
+                string direction = "H";
+                if (rand.Next(0, 2) == 0)
+                {
+                    direction = "V";
+                }
+                if (!grid.PlaceShip(new Ship(shipNames[i], shipLength[i]), rand.Next(grid.BoardLength()), rand.Next(grid.BoardHeight()), direction))
+                {
+                    i--;
+                }
             }
-            
-            grid.PlaceShip(new Ship("Battleship", 4), x, y, direction);
         }
 
         public bool Attack(Grid enemyGrid)

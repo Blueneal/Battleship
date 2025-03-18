@@ -4,7 +4,7 @@
     {
         private char[,] Board;
         public List<Ship> Ships;
-        private (int,int) BoardDimensions = (10, 10);
+        public (int,int) BoardDimensions = (10, 10);
         public Grid()
         {
             Board = new char[BoardDimensions.Item1, BoardDimensions.Item2];
@@ -25,7 +25,7 @@
             {
                 if (i == 0)
                 {
-                    Console.WriteLine("  0 1 2 3 4 5 6 7 8 9");
+                    Console.WriteLine("  1 2 3 4 5 6 7 8 9 10");
                 }
                 for (int j = 0; j < BoardDimensions.Item2; j++)
                 {
@@ -43,6 +43,16 @@
                 Console.ResetColor();
                 Console.WriteLine();
             }
+        }
+
+        public int BoardLength()
+        {
+            return BoardDimensions.Item1;
+        }
+
+        public int BoardHeight()
+        {
+            return BoardDimensions.Item2;
         }
 
         public bool PlaceShip(Ship ship, int startX, int startY, string direction)

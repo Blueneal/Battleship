@@ -4,6 +4,8 @@
     {
         static void Main()
         {
+            bool isPlaying = false;
+
             BasePlayer player = new BasePlayer();
             BasePlayer ai = new BasePlayer();
             Grid aiGrid = ai.GetGrid();
@@ -15,31 +17,57 @@
             Console.WriteLine("Press Enter to Continue...");
             Console.ReadLine();
 
-            while (true)
+            isPlaying = true;
+            while (isPlaying == true)
             {
                 Console.Clear();
-                Console.WriteLine("AI's Board (Shots Fired):");
-                aiGrid.DisplayBoard(false);
+                Console.WriteLine("Select a Game Mode");
+                Console.WriteLine("");
+                Console.WriteLine("[1] One Player");
+                Console.WriteLine("[2] Two Players");
+                Console.WriteLine("[3] Quit");
+                string? input = Console.ReadLine();
 
-                Console.WriteLine("\nYour Board:");
-                playerGrid.DisplayBoard(false);
-                Console.WriteLine("Enter to fire random shots");
-                Console.ReadLine();
-                player.Attack(aiGrid);
-
-                shots++;
-                if (aiGrid.CheckWin())
+                if (input == "1")
                 {
-                    Console.WriteLine("You win in " + shots + " shots!");
-                    break;
+                    isPlaying = true;
+                    while (isPlaying == true)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("AI's Board (Shots Fired):");
+                        aiGrid.DisplayBoard(false);
+
+                        Console.WriteLine("\nYour Board:");
+                        playerGrid.DisplayBoard(false);
+                        Console.WriteLine("Enter to fire random shots");
+                        Console.ReadLine();
+                        player.Attack(aiGrid);
+
+                        shots++;
+                        if (aiGrid.CheckWin())
+                        {
+                            Console.WriteLine("You win in " + shots + " shots!");
+                            break;
+                        }
+                        ai.Attack(playerGrid);
+                        if (playerGrid.CheckWin())
+                        {
+                            Console.WriteLine("AI wins!");
+                            break;
+                        }
+                    }
                 }
-                ai.Attack(playerGrid);
-                if (playerGrid.CheckWin())
+                else if (input == "2")
                 {
-                    Console.WriteLine("AI wins!");
-                    break;
+                    Console.WriteLine("Multiplayer Selected");
+                }
+                else if (input == "3")
+                {
+                    isPlaying = false;
+                    Console.WriteLine("Thank You For Playing!");
                 }
             }
+
         }
         public static void TitleScreen()
         {
