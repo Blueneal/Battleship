@@ -10,9 +10,9 @@
             Grid playerGrid = player.GetGrid();
             int shots = 0;
 
-
             TitleScreen();
-            Console.WriteLine("Welcome to Battleship! Press Enter to start.");
+            Console.WriteLine("");
+            Console.WriteLine("Press Enter to Continue...");
             Console.ReadLine();
 
             while (true)
