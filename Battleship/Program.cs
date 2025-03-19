@@ -31,7 +31,7 @@
                 if (input == "1")
                 {
                     isPlaying = true;
-                    while (isPlaying == true)
+                    while (isPlaying)
                     {
                         Console.Clear();
                         Console.WriteLine("AI's Board (Shots Fired):");
@@ -39,20 +39,20 @@
 
                         Console.WriteLine("\nYour Board:");
                         playerGrid.DisplayBoard(false);
-                        Console.WriteLine("Enter to fire random shots");
-                        Console.ReadLine();
-                        player.Attack(aiGrid);
+                        player.PlayerAttack(aiGrid);
 
                         shots++;
                         if (aiGrid.CheckWin())
                         {
                             Console.WriteLine("You win in " + shots + " shots!");
+                            isPlaying = false;
                             break;
                         }
                         ai.Attack(playerGrid);
                         if (playerGrid.CheckWin())
                         {
                             Console.WriteLine("AI wins!");
+                            isPlaying = false;
                             break;
                         }
                     }
