@@ -65,6 +65,7 @@
 
         public bool Attack(Grid enemyGrid)
         {
+            rand = new Random();
             int x, y;
             do
             {
