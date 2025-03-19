@@ -8,9 +8,10 @@ namespace Battleship
 {
     internal class AIPlayer : BasePlayer
     {
-        /*/public bool Attack(Grid enemyGrid)
+        private Random rand;
+        public bool Attack(Grid enemyGrid)
         {
-            new Random = new Random();
+            rand = new Random();
             int x, y;
             do
             {
@@ -19,6 +20,6 @@ namespace Battleship
             }
             while (enemyGrid.MakeGuess(x, y));
             return true;
-        }/*/
+        }
     }
 }

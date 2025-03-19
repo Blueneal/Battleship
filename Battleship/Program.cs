@@ -6,12 +6,6 @@
         {
             bool isPlaying = false;
 
-            BasePlayer player = new BasePlayer();
-            BasePlayer ai = new BasePlayer();
-            Grid aiGrid = ai.GetGrid();
-            Grid playerGrid = player.GetGrid();
-            int shots = 0;
-
             TitleScreen();
             Console.WriteLine("");
             Console.WriteLine("Press Enter to Continue...");
@@ -30,6 +24,12 @@
 
                 if (input == "1")
                 {
+                    BasePlayer player = new BasePlayer();
+                    BasePlayer ai = new BasePlayer();
+                    Grid aiGrid = ai.GetGrid();
+                    Grid playerGrid = player.GetGrid();
+                    int shots = 0;
+
                     isPlaying = true;
                     while (isPlaying)
                     {

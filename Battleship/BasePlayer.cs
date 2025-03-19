@@ -17,12 +17,31 @@
 
         public void PlaceShips()
         {
+            Random rand = new Random();
+
+
+                for (int i = 0; i < shipNames.Length; i++)
+                {
+                    string direction = "H";
+                    if (rand.Next(0, 2) == 0)
+                    {
+                        direction = "V";
+                    }
+                    if (!grid.PlaceShip(new Ship(shipNames[i], shipLength[i]), rand.Next(grid.BoardLength()), rand.Next(grid.BoardHeight()), direction))
+                    {
+                        i--;
+                    }
+                }
+        }
+        /*/
+        public void PlaceShips()
+        {
             for (int i = 0; i < shipNames.Length; i++)
             {
                 Console.WriteLine("Insert a x coordinate for " + shipNames[i]);
-                int x = Convert.ToInt32(Console.ReadLine());
+                int startX = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Insert a y coordinate for " + shipNames[i]);
-                int y = Convert.ToInt32(Console.ReadLine()); 
+                int startY = Convert.ToInt32(Console.ReadLine()); 
                 Console.WriteLine("Select [H] Horizontal or [V] Vertical");
                 string? direction = Console.ReadLine();
                 if (direction == null)
@@ -30,12 +49,13 @@
                     Console.WriteLine("Incorrect input, select H or V");
                     continue;
                 }
-                if (!grid.PlaceShip(new Ship(shipNames[i], shipLength[i]), x, y, direction))
+                if (!grid.PlaceShip(new Ship(shipNames[i], shipLength[i]), startX, startY, direction))
                 {
                     i--;
                 }
+                grid.PlaceShip(new Ship(shipNames[i], shipLength[i]), startX, startY, direction);
             }
-        }
+        }/*/
 
         public bool PlayerAttack(Grid enemyGrid)
         {
@@ -54,12 +74,12 @@
                 {
                     if (enemyShips[i].Coordinates[j].Item1 == x && enemyShips[i].Coordinates[j].Item2 == y)
                     {
-                        enemyGrid.MakeGuess(x, y);
+                        while (enemyGrid.MakeGuess(x, y));
                         //enemyShips[i].Hits++;
-                        return true;
                     }
                 }
             }
+            while (enemyGrid.MakeGuess(x, y)) ;
             return false;
         }
 
