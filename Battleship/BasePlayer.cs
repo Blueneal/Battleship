@@ -15,7 +15,7 @@
             PlaceShips();
         }
 
-        public void PlaceShips()
+        public void PlaceShips() //Randomly places the ships on the board, and checks to make sure there is no overlap or out of bounds ships
         {
             Random rand = new Random();
 
@@ -33,54 +33,25 @@
                     }
                 }
         }
-        /*/
-        public void PlaceShips()
+        public bool PlayerAttack(Grid enemyGrid) //Prompts the player for an attack via x and y coordinates
         {
-            for (int i = 0; i < shipNames.Length; i++)
-            {
-                Console.WriteLine("Insert a x coordinate for " + shipNames[i]);
-                int startX = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Insert a y coordinate for " + shipNames[i]);
-                int startY = Convert.ToInt32(Console.ReadLine()); 
-                Console.WriteLine("Select [H] Horizontal or [V] Vertical");
-                string? direction = Console.ReadLine();
-                if (direction == null)
-                {
-                    Console.WriteLine("Incorrect input, select H or V");
-                    continue;
-                }
-                if (!grid.PlaceShip(new Ship(shipNames[i], shipLength[i]), startX, startY, direction))
-                {
-                    i--;
-                }
-                grid.PlaceShip(new Ship(shipNames[i], shipLength[i]), startX, startY, direction);
-            }
-        }/*/
-
-        public bool PlayerAttack(Grid enemyGrid)
-        {
-            Console.WriteLine("Enter a Number for the x coordinate");
-            int x = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter a Number for the Y coordinate");
-            int y = Convert.ToInt32(Console.ReadLine());
-            List<Ship>enemyShips = enemyGrid.Ships;
-            for (int i = 0; i < enemyShips.Count; i++)
+            int x = Convert.ToInt32(Console.ReadLine());
+            if (x >= 11 || x <= 0)
             {
-                if (enemyShips[i].IsSunk())
-                {
-                    continue;
-                }
-                for (int j = 0; j < enemyShips[i].Coordinates.Count; j++)
-                {
-                    if (enemyShips[i].Coordinates[j].Item1 == x && enemyShips[i].Coordinates[j].Item2 == y)
-                    {
-                        while (enemyGrid.MakeGuess(x, y));
-                        //enemyShips[i].Hits++;
-                    }
-                }
+                Console.WriteLine("Incorrect Number, number must be between 1-10");
+                x = Convert.ToInt32(Console.ReadLine());
             }
-            while (enemyGrid.MakeGuess(x, y)) ;
-            return false;
+            Console.WriteLine("Enter a Number for the X coordinate");
+            int y = Convert.ToInt32(Console.ReadLine());
+            if (y >= 11 || y <= 0)
+            {
+                Console.WriteLine("Incorrect Number, number must be between 1-10");
+                y = Convert.ToInt32(Console.ReadLine());
+            }
+            bool didHit = enemyGrid.MakeGuess(x-1, y-1);
+            
+            return didHit;
         }
 
         public bool Attack(Grid enemyGrid)

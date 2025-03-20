@@ -20,7 +20,7 @@
 
         public void DisplayBoard(bool hideShips)
         {
-            string startLetter = "ABCDEFGHIJ";
+            string[] startLetter = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
             for (int i = 0; i < BoardDimensions.Item1; i++)
             {
                 if (i == 0)
@@ -38,7 +38,20 @@
                     {
                         displayChar = '~';
                     }
+                    switch (displayChar) //Sets the characters and colors of the board
+                    {
+                        case 'S':
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            break;
+                        case '~':
+                            Console.ForegroundColor = ConsoleColor.DarkBlue;
+                            break;
+                        case 'X':
+                            Console.ForegroundColor= ConsoleColor.Red;
+                            break;
+                    }
                     Console.Write(displayChar + " ");
+                    Console.ResetColor();
                 }
                 Console.ResetColor();
                 Console.WriteLine();
@@ -55,7 +68,7 @@
             return BoardDimensions.Item2;
         }
 
-        public bool PlaceShip(Ship ship, int startX, int startY, string direction)
+        public bool PlaceShip(Ship ship, int startX, int startY, string direction) //takes the variables of the ship and prints it onto the board with appropriate characters
         {
             List<(int, int)> tempCoordinates = new List<(int, int)>();
             for (int i = 0; i < ship.Length; i++)
@@ -97,9 +110,13 @@
                     if (ship.Coordinates.Contains((x, y)))
                     {
                         ship.Hits++;
-                        return true;
+                        return false;
                     }
                 }
+            }
+            else if (Board[x, y] == 'X')
+            {
+                return false;
             }
             Board[x, y] = 'O';
             return false;
